@@ -6,7 +6,6 @@ canvas.height = innerHeight;
 
 class Player {
   constructor() {
-    
     this.velocity = {
       x: 0,
       y: 0,
@@ -52,3 +51,17 @@ function animate() {
 }
 
 animate();
+
+addEventListener("keydown", ({ key }) => {
+  switch (key) {
+    case "a":
+      console.log("left");
+      break;
+    case "d":
+      console.log("right");
+      break;
+      case " ":
+        console.log("space");
+        break;
+  }
+});
