@@ -165,7 +165,7 @@ class Grid {
     this.velocity.y = 0;
 
     if (this.position.x + this.width >= canvas.width || this.position.x <= 0) {
-      this.velocity.x = -this.velocity.x;
+      this.velocity.x = -this.velocity.x * 1.15;
       this.velocity.y = 30;
     }
   }
@@ -200,14 +200,14 @@ function animate() {
   projectiles.forEach((projectile, index) => {
     if (projectile.position.y + projectile.radius <= 0) {
       setTimeout(() => {
-        projectiles.slice(index, 1);
+        projectiles.splice(index, 1);
       }, 0);
     } else {
       projectile.update();
     }
   });
 
-  grids.forEach((grid) => {
+  grids.forEach((grid, gridIndex) => {
     grid.update();
     grid.invaders.forEach((invader, i) => {
       invader.update({ velocity: grid.velocity });
@@ -243,6 +243,8 @@ function animate() {
                   firstInvader.position.x +
                   lastInvader.width;
                 grid.position.x = firstInvader.position.x;
+              } else {
+                grids.splice(gridIndex, 1);
               }
             }
           }, 0);
